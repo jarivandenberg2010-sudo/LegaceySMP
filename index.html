@@ -31,25 +31,27 @@
             content: "";
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.55);
+            background: rgba(0, 0, 0, 0.55);
             z-index: -1;
         }
 
         header {
             position: sticky;
             top: 0;
-            z-index: 10;
+            z-index: 1000;
             padding: 20px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(10,10,15,0.95);
+            background: rgba(10, 10, 15, 0.95);
+            border-bottom: 1px solid rgba(155, 92, 255, 0.35);
         }
 
         .logo {
             font-size: 28px;
             font-weight: bold;
             color: #b46cff;
+            text-shadow: 0 0 18px rgba(180, 108, 255, 0.8);
         }
 
         nav {
@@ -79,7 +81,7 @@
         .hero h1 {
             font-size: 70px;
             margin-bottom: 20px;
-            text-shadow: 0 0 30px #9b5cff;
+            text-shadow: 0 0 30px rgba(155, 92, 255, 0.9);
         }
 
         .hero p {
@@ -88,7 +90,8 @@
         }
 
         .main-button,
-        .buy-button {
+        .buy-button,
+        .submit-button {
             background: #9b5cff;
             color: white;
             border: none;
@@ -101,13 +104,14 @@
         }
 
         .main-button:hover,
-        .buy-button:hover {
+        .buy-button:hover,
+        .submit-button:hover {
             background: #7e3ee5;
         }
 
         section {
             padding: 70px 8%;
-            background: rgba(5,5,10,0.82);
+            background: rgba(5, 5, 10, 0.82);
         }
 
         .section-title {
@@ -125,15 +129,18 @@
         }
 
         .card {
-            background: rgba(15,15,24,0.96);
+            background: rgba(15, 15, 24, 0.96);
             border: 1px solid #303044;
             border-radius: 14px;
             padding: 25px;
             text-align: center;
+            transition: 0.2s;
         }
 
         .card:hover {
+            transform: translateY(-5px);
             border-color: #9b5cff;
+            box-shadow: 0 0 25px rgba(155, 92, 255, 0.25);
         }
 
         .card h3 {
@@ -144,6 +151,7 @@
         .card p {
             color: #b8b8c4;
             line-height: 1.5;
+            min-height: 55px;
             margin-bottom: 20px;
         }
 
@@ -161,17 +169,18 @@
         footer {
             text-align: center;
             padding: 30px;
-            background: rgba(8,8,14,0.98);
+            background: rgba(8, 8, 14, 0.98);
             color: #999;
         }
 
         /* POPUP */
+
         .popup {
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.75);
             z-index: 9999;
+            background: rgba(0, 0, 0, 0.75);
             align-items: center;
             justify-content: center;
             padding: 20px;
@@ -188,16 +197,25 @@
             border: 1px solid #9b5cff;
             border-radius: 15px;
             padding: 30px;
+            box-shadow: 0 0 35px rgba(155, 92, 255, 0.4);
         }
 
         .popup-box h2 {
             margin-bottom: 10px;
         }
 
-        .product-selected {
+        .popup-description {
+            color: #aaaab8;
+            margin-bottom: 20px;
+        }
+
+        .selected-product {
+            background: #191923;
             color: #b46cff;
             font-weight: bold;
-            margin: 20px 0;
+            padding: 13px;
+            border-radius: 8px;
+            margin-bottom: 20px;
         }
 
         .popup-box input {
@@ -208,17 +226,30 @@
             border: 1px solid #3a3a4d;
             background: #09090f;
             color: white;
+            outline: none;
+        }
+
+        .popup-box input:focus {
+            border-color: #9b5cff;
+        }
+
+        .submit-button {
+            width: 100%;
         }
 
         .close-button {
             width: 100%;
-            margin-top: 10px;
             padding: 12px;
+            margin-top: 10px;
             background: transparent;
             color: white;
             border: 1px solid #44445a;
             border-radius: 8px;
             cursor: pointer;
+        }
+
+        .close-button:hover {
+            background: #20202c;
         }
 
         @media (max-width: 700px) {
@@ -227,8 +258,16 @@
                 gap: 15px;
             }
 
+            nav {
+                gap: 15px;
+            }
+
             .hero h1 {
                 font-size: 45px;
+            }
+
+            .hero p {
+                font-size: 16px;
             }
         }
     </style>
@@ -246,13 +285,26 @@
     </nav>
 </header>
 
+
+<!-- HOME -->
+
 <section class="hero" id="home">
     <div>
         <h1>LEGACY SMP</h1>
-        <p>Welkom bij de officiële Legacy SMP webshop.</p>
-        <a href="#ranks" class="main-button">Bekijk de webshop</a>
+
+        <p>
+            Welkom bij de officiële Legacy SMP webshop.
+            Koop hier jouw favoriete ranks en crates.
+        </p>
+
+        <a href="#ranks" class="main-button">
+            Bekijk de webshop
+        </a>
     </div>
 </section>
+
+
+<!-- RANKS -->
 
 <section id="ranks">
     <h2 class="section-title">⭐ Ranks</h2>
@@ -263,39 +315,52 @@
             <h3>VIP</h3>
             <p>Speciale voordelen op Legacy SMP.</p>
             <div class="price">€5</div>
-            <button class="buy-button" onclick="openPopup('VIP', '€5')">Kopen</button>
+            <button class="buy-button" onclick="openPopup('VIP', '€5')">
+                Kopen
+            </button>
         </div>
 
         <div class="card">
             <h3>ELITE</h3>
             <p>Meer voordelen voor jouw avontuur.</p>
             <div class="price">€10</div>
-            <button class="buy-button" onclick="openPopup('ELITE', '€10')">Kopen</button>
+            <button class="buy-button" onclick="openPopup('ELITE', '€10')">
+                Kopen
+            </button>
         </div>
 
         <div class="card">
             <h3>LEGEND</h3>
             <p>Exclusieve voordelen voor echte spelers.</p>
             <div class="price">€15</div>
-            <button class="buy-button" onclick="openPopup('LEGEND', '€15')">Kopen</button>
+            <button class="buy-button" onclick="openPopup('LEGEND', '€15')">
+                Kopen
+            </button>
         </div>
 
         <div class="card">
             <h3>HERO</h3>
             <p>Een exclusieve Legacy SMP rank.</p>
             <div class="price">€25</div>
-            <button class="buy-button" onclick="openPopup('HERO', '€25')">Kopen</button>
+            <button class="buy-button" onclick="openPopup('HERO', '€25')">
+                Kopen
+            </button>
         </div>
 
         <div class="card">
             <h3>LEGACY</h3>
             <p>De ultieme Legacy SMP rank.</p>
             <div class="price">€35</div>
-            <button class="buy-button" onclick="openPopup('LEGACY', '€35')">Kopen</button>
+            <button class="buy-button" onclick="openPopup('LEGACY', '€35')">
+                Kopen
+            </button>
         </div>
 
     </div>
 </section>
+
+
+<!-- CRATES -->
 
 <section id="crates">
     <h2 class="section-title">🎁 Crates</h2>
@@ -306,53 +371,78 @@
             <h3>Spawner Crate</h3>
             <p>Maak kans op krachtige spawners.</p>
             <div class="price">€5</div>
-            <button class="buy-button" onclick="openPopup('Spawner Crate', '€5')">Kopen</button>
+            <button class="buy-button" onclick="openPopup('Spawner Crate', '€5')">
+                Kopen
+            </button>
         </div>
 
         <div class="card">
             <h3>Legacy Crate</h3>
             <p>Een speciale crate met geweldige beloningen.</p>
             <div class="price">€10</div>
-            <button class="buy-button" onclick="openPopup('Legacy Crate', '€10')">Kopen</button>
+            <button class="buy-button" onclick="openPopup('Legacy Crate', '€10')">
+                Kopen
+            </button>
         </div>
 
         <div class="card">
             <h3>Legacy Crate+</h3>
             <p>Een verbeterde crate met betere rewards.</p>
             <div class="price">€15</div>
-            <button class="buy-button" onclick="openPopup('Legacy Crate+', '€15')">Kopen</button>
+            <button class="buy-button" onclick="openPopup('Legacy Crate+', '€15')">
+                Kopen
+            </button>
         </div>
 
         <div class="card">
             <h3>Obsidian Crate</h3>
             <p>Een exclusieve crate met krachtige rewards.</p>
             <div class="price">€20</div>
-            <button class="buy-button" onclick="openPopup('Obsidian Crate', '€20')">Kopen</button>
+            <button class="buy-button" onclick="openPopup('Obsidian Crate', '€20')">
+                Kopen
+            </button>
         </div>
 
     </div>
 </section>
 
+
+<!-- FOOTER -->
+
 <footer>
     <p>© 2026 Legacy SMP — Alle rechten voorbehouden.</p>
 </footer>
 
-<!-- POPUP -->
-<div class="popup" id="popup">
+
+<!-- BESTEL POPUP -->
+
+<div class="popup" id="orderPopup">
 
     <div class="popup-box">
 
-        <h2>Bestellen</h2>
+        <h2>Bestelling plaatsen</h2>
 
-        <div class="product-selected" id="productSelected">
+        <p class="popup-description">
+            Vul hieronder je Minecraft-gegevens in.
+        </p>
+
+        <div class="selected-product" id="selectedProduct">
             Product
         </div>
 
-        <input type="text" id="minecraftName" placeholder="Minecraft gebruikersnaam">
+        <input
+            type="text"
+            id="minecraftName"
+            placeholder="Minecraft gebruikersnaam"
+        >
 
-        <input type="email" id="email" placeholder="E-mailadres">
+        <input
+            type="email"
+            id="email"
+            placeholder="E-mailadres"
+        >
 
-        <button class="buy-button" onclick="sendOrder()">
+        <button class="submit-button" onclick="sendOrder()">
             Bestelling versturen
         </button>
 
@@ -361,46 +451,73 @@
         </button>
 
     </div>
-
 </div>
 
+
 <script>
-    var selectedProduct = "";
-    var selectedPrice = "";
+
+    let selectedProduct = "";
+    let selectedPrice = "";
 
     function openPopup(product, price) {
+
         selectedProduct = product;
         selectedPrice = price;
 
-        document.getElementById("productSelected").innerHTML =
+        document.getElementById("selectedProduct").textContent =
             product + " — " + price;
 
-        document.getElementById("popup").classList.add("show");
+        document.getElementById("orderPopup").classList.add("show");
+
+        document.getElementById("minecraftName").focus();
     }
+
 
     function closePopup() {
-        document.getElementById("popup").classList.remove("show");
+
+        document.getElementById("orderPopup").classList.remove("show");
+
+        document.getElementById("minecraftName").value = "";
+        document.getElementById("email").value = "";
     }
 
-    function sendOrder() {
-        var minecraftName = document.getElementById("minecraftName").value;
-        var email = document.getElementById("email").value;
 
-        if (minecraftName === "" || email === "") {
-            alert("Vul je Minecraft gebruikersnaam en e-mailadres in.");
+    function sendOrder() {
+
+        const minecraftName =
+            document.getElementById("minecraftName").value.trim();
+
+        const email =
+            document.getElementById("email").value.trim();
+
+        if (minecraftName === "") {
+            alert("Vul je Minecraft gebruikersnaam in.");
+            return;
+        }
+
+        if (email === "") {
+            alert("Vul je e-mailadres in.");
             return;
         }
 
         alert(
-            "Bestelling aangemaakt!\n\n" +
+            "Bestelling ingevuld!\n\n" +
             "Product: " + selectedProduct + "\n" +
             "Prijs: " + selectedPrice + "\n" +
-            "Minecraft naam: " + minecraftName + "\n" +
-            "E-mail: " + email
+            "Minecraft gebruikersnaam: " + minecraftName + "\n" +
+            "E-mailadres: " + email
         );
-
-        closePopup();
     }
+
+
+    document.getElementById("orderPopup").addEventListener("click", function(event) {
+
+        if (event.target === this) {
+            closePopup();
+        }
+
+    });
+
 </script>
 
 </body>
