@@ -32,11 +32,8 @@
         body::before {
             content: "";
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.50);
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
             z-index: -1;
         }
 
@@ -49,7 +46,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(10, 10, 15, 0.90);
+            background: rgba(10, 10, 15, 0.92);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(160, 80, 255, 0.35);
         }
@@ -70,7 +67,6 @@
             color: white;
             text-decoration: none;
             font-weight: bold;
-            transition: 0.2s;
         }
 
         nav a:hover {
@@ -104,6 +100,15 @@
             margin-bottom: 35px;
         }
 
+        .main-button,
+        .buy-button,
+        .submit-button {
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
         .main-button {
             display: inline-block;
             padding: 15px 35px;
@@ -111,20 +116,19 @@
             color: white;
             text-decoration: none;
             border-radius: 10px;
-            font-weight: bold;
             box-shadow: 0 0 25px rgba(155, 92, 255, 0.45);
-            transition: 0.2s;
         }
 
-        .main-button:hover {
-            transform: scale(1.05);
+        .main-button:hover,
+        .buy-button:hover,
+        .submit-button:hover {
+            transform: scale(1.03);
             background: #8140e8;
-            box-shadow: 0 0 35px rgba(155, 92, 255, 0.7);
         }
 
         section {
             padding: 80px 8%;
-            background: rgba(5, 5, 10, 0.80);
+            background: rgba(5, 5, 10, 0.82);
         }
 
         .section-title {
@@ -177,19 +181,11 @@
         }
 
         .buy-button {
-            display: block;
             width: 100%;
             padding: 12px;
             background: #9b5cff;
             color: white;
-            text-decoration: none;
             border-radius: 8px;
-            font-weight: bold;
-            transition: 0.2s;
-        }
-
-        .buy-button:hover {
-            background: #8140e8;
         }
 
         footer {
@@ -198,6 +194,101 @@
             background: rgba(8, 8, 14, 0.97);
             border-top: 1px solid #2c2c42;
             color: #9999a8;
+        }
+
+        /* POPUP */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(0, 0, 0, 0.75);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-box {
+            width: 100%;
+            max-width: 450px;
+            background: #11111a;
+            border: 1px solid #9b5cff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 35px rgba(155, 92, 255, 0.4);
+        }
+
+        .modal-box h2 {
+            margin-bottom: 10px;
+        }
+
+        .modal-box p {
+            color: #aaaab8;
+            margin-bottom: 20px;
+        }
+
+        .selected-product {
+            background: #191923;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 18px;
+            color: #b46cff;
+            font-weight: bold;
+        }
+
+        .modal-box label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .modal-box input {
+            width: 100%;
+            padding: 13px;
+            margin-bottom: 16px;
+            border-radius: 8px;
+            border: 1px solid #38384d;
+            background: #0b0b12;
+            color: white;
+            outline: none;
+        }
+
+        .modal-box input:focus {
+            border-color: #9b5cff;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 13px;
+            background: #9b5cff;
+            color: white;
+            border-radius: 8px;
+            margin-top: 5px;
+        }
+
+        .close-button {
+            margin-top: 10px;
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #3a3a50;
+            background: transparent;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .success {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            background: rgba(60, 180, 100, 0.15);
+            border: 1px solid rgba(60, 180, 100, 0.4);
+            border-radius: 8px;
+            color: #8ff0ad;
         }
 
         @media (max-width: 700px) {
@@ -235,117 +326,216 @@
 
 <body>
 
-    <header>
-        <div class="logo">LEGACY SMP</div>
+<header>
+    <div class="logo">LEGACY SMP</div>
 
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#ranks">Ranks</a>
-            <a href="#crates">Crates</a>
-        </nav>
-    </header>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#ranks">Ranks</a>
+        <a href="#crates">Crates</a>
+    </nav>
+</header>
 
 
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>LEGACY SMP</h1>
+<section class="hero" id="home">
+    <div class="hero-content">
+        <h1>LEGACY SMP</h1>
 
-            <p>
-                Welkom bij de officiële Legacy SMP webshop.
-                Koop hier jouw favoriete ranks en crates.
-            </p>
+        <p>
+            Welkom bij de officiële Legacy SMP webshop.
+            Koop hier jouw favoriete ranks en crates.
+        </p>
 
-            <a href="#ranks" class="main-button">
-                Bekijk de webshop
-            </a>
+        <a href="#ranks" class="main-button">
+            Bekijk de webshop
+        </a>
+    </div>
+</section>
+
+
+<section id="ranks">
+    <h2 class="section-title">⭐ Ranks</h2>
+
+    <div class="products">
+
+        <div class="card">
+            <h3>VIP</h3>
+            <p>Ontvang speciale voordelen en extra functies op Legacy SMP.</p>
+            <div class="price">€5</div>
+            <button class="buy-button" onclick="openOrder('VIP', '€5')">Kopen</button>
         </div>
-    </section>
 
-
-    <section id="ranks">
-        <h2 class="section-title">⭐ Ranks</h2>
-
-        <div class="products">
-
-            <div class="card">
-                <h3>VIP</h3>
-                <p>Ontvang speciale voordelen en extra functies op Legacy SMP.</p>
-                <div class="price">€5</div>
-                <a href="#" class="buy-button">Kopen</a>
-            </div>
-
-            <div class="card">
-                <h3>ELITE</h3>
-                <p>Een krachtige rank met extra voordelen voor jouw avontuur.</p>
-                <div class="price">€10</div>
-                <a href="#" class="buy-button">Kopen</a>
-            </div>
-
-            <div class="card">
-                <h3>LEGEND</h3>
-                <p>Word een echte legende met exclusieve voordelen.</p>
-                <div class="price">€15</div>
-                <a href="#" class="buy-button">Kopen</a>
-            </div>
-
-            <div class="card">
-                <h3>HERO</h3>
-                <p>Een exclusieve rank voor echte Legacy SMP-spelers.</p>
-                <div class="price">€25</div>
-                <a href="#" class="buy-button">Kopen</a>
-            </div>
-
-            <div class="card">
-                <h3>LEGACY</h3>
-                <p>De ultieme rank voor spelers die alles willen.</p>
-                <div class="price">€35</div>
-                <a href="#" class="buy-button">Kopen</a>
-            </div>
-
+        <div class="card">
+            <h3>ELITE</h3>
+            <p>Een krachtige rank met extra voordelen voor jouw avontuur.</p>
+            <div class="price">€10</div>
+            <button class="buy-button" onclick="openOrder('ELITE', '€10')">Kopen</button>
         </div>
-    </section>
 
-
-    <section id="crates">
-        <h2 class="section-title">🎁 Crates</h2>
-
-        <div class="products">
-
-            <div class="card">
-                <h3>Spawner Crate</h3>
-                <p>Maak kans op krachtige spawners en speciale beloningen.</p>
-                <div class="price">€5</div>
-                <a href="#" class="buy-button">Kopen</a>
-            </div>
-
-            <div class="card">
-                <h3>Legacy Crate</h3>
-                <p>Een speciale crate met geweldige beloningen.</p>
-                <div class="price">€10</div>
-                <a href="#" class="buy-button">Kopen</a>
-            </div>
-
-            <div class="card">
-                <h3>Legacy Crate+</h3>
-                <p>Een verbeterde crate met betere en zeldzamere rewards.</p>
-                <div class="price">€15</div>
-                <a href="#" class="buy-button">Kopen</a>
-            </div>
-
-            <div class="card">
-                <h3>Obsidian Crate</h3>
-                <p>Een exclusieve crate met krachtige beloningen.</p>
-                <div class="price">€20</div>
-                <a href="#" class="buy-button">Kopen</a>
-            </div>
-
+        <div class="card">
+            <h3>LEGEND</h3>
+            <p>Word een echte legende met exclusieve voordelen.</p>
+            <div class="price">€15</div>
+            <button class="buy-button" onclick="openOrder('LEGEND', '€15')">Kopen</button>
         </div>
-    </section>
+
+        <div class="card">
+            <h3>HERO</h3>
+            <p>Een exclusieve rank voor echte Legacy SMP-spelers.</p>
+            <div class="price">€25</div>
+            <button class="buy-button" onclick="openOrder('HERO', '€25')">Kopen</button>
+        </div>
+
+        <div class="card">
+            <h3>LEGACY</h3>
+            <p>De ultieme rank voor spelers die alles willen.</p>
+            <div class="price">€35</div>
+            <button class="buy-button" onclick="openOrder('LEGACY', '€35')">Kopen</button>
+        </div>
+
+    </div>
+</section>
 
 
-    <footer>
-        <p>© 2026 Legacy SMP — Alle rechten voorbehouden.</p>
-    </footer>
+<section id="crates">
+    <h2 class="section-title">🎁 Crates</h2>
+
+    <div class="products">
+
+        <div class="card">
+            <h3>Spawner Crate</h3>
+            <p>Maak kans op krachtige spawners en speciale beloningen.</p>
+            <div class="price">€5</div>
+            <button class="buy-button" onclick="openOrder('Spawner Crate', '€5')">Kopen</button>
+        </div>
+
+        <div class="card">
+            <h3>Legacy Crate</h3>
+            <p>Een speciale crate met geweldige beloningen.</p>
+            <div class="price">€10</div>
+            <button class="buy-button" onclick="openOrder('Legacy Crate', '€10')">Kopen</button>
+        </div>
+
+        <div class="card">
+            <h3>Legacy Crate+</h3>
+            <p>Een verbeterde crate met betere en zeldzamere rewards.</p>
+            <div class="price">€15</div>
+            <button class="buy-button" onclick="openOrder('Legacy Crate+', '€15')">Kopen</button>
+        </div>
+
+        <div class="card">
+            <h3>Obsidian Crate</h3>
+            <p>Een exclusieve crate met krachtige beloningen.</p>
+            <div class="price">€20</div>
+            <button class="buy-button" onclick="openOrder('Obsidian Crate', '€20')">Kopen</button>
+        </div>
+
+    </div>
+</section>
+
+
+<footer>
+    <p>© 2026 Legacy SMP — Alle rechten voorbehouden.</p>
+</footer>
+
+
+<!-- BESTELFORMULIER -->
+<div class="modal" id="orderModal">
+
+    <div class="modal-box">
+
+        <h2>Bestelling plaatsen</h2>
+
+        <p>Vul hieronder je Minecraft-gegevens in.</p>
+
+        <div class="selected-product" id="selectedProduct">
+            Product
+        </div>
+
+        <form id="orderForm">
+
+            <label for="minecraftName">Minecraft gebruikersnaam</label>
+
+            <input
+                type="text"
+                id="minecraftName"
+                placeholder="Bijvoorbeeld: Jari123"
+                required
+            >
+
+            <label for="email">E-mailadres</label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="jij@example.com"
+                required
+            >
+
+            <button type="submit" class="submit-button">
+                Bestelling versturen
+            </button>
+
+            <button type="button" class="close-button" onclick="closeOrder()">
+                Annuleren
+            </button>
+
+            <div class="success" id="successMessage">
+                Bestelling ingevuld! Er is nog geen betaling uitgevoerd.
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+
+<script>
+    let selectedProduct = "";
+    let selectedPrice = "";
+
+    function openOrder(product, price) {
+        selectedProduct = product;
+        selectedPrice = price;
+
+        document.getElementById("selectedProduct").textContent =
+            product + " — " + price;
+
+        document.getElementById("orderModal").classList.add("active");
+
+        document.getElementById("minecraftName").focus();
+    }
+
+    function closeOrder() {
+        document.getElementById("orderModal").classList.remove("active");
+        document.getElementById("successMessage").style.display = "none";
+        document.getElementById("orderForm").reset();
+    }
+
+    document.getElementById("orderForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const minecraftName =
+            document.getElementById("minecraftName").value;
+
+        const email =
+            document.getElementById("email").value;
+
+        console.log("Nieuwe bestelling:");
+        console.log("Product:", selectedProduct);
+        console.log("Prijs:", selectedPrice);
+        console.log("Minecraft naam:", minecraftName);
+        console.log("E-mail:", email);
+
+        document.getElementById("successMessage").style.display = "block";
+    });
+
+    document.getElementById("orderModal").addEventListener("click", function(event) {
+        if (event.target === this) {
+            closeOrder();
+        }
+    });
+</script>
 
 </body>
 </html>
