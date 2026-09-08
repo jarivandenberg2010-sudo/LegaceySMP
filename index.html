@@ -25,13 +25,14 @@
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            background-repeat: no-repeat;
         }
 
         body::before {
             content: "";
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.55);
+            background: rgba(0, 0, 0, 0.30);
             z-index: -1;
         }
 
@@ -43,8 +44,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(10, 10, 15, 0.95);
+            background: rgba(10, 10, 15, 0.92);
             border-bottom: 1px solid rgba(155, 92, 255, 0.35);
+            backdrop-filter: blur(10px);
         }
 
         .logo {
@@ -63,6 +65,7 @@
             color: white;
             text-decoration: none;
             font-weight: bold;
+            transition: 0.2s;
         }
 
         nav a:hover {
@@ -86,6 +89,7 @@
 
         .hero p {
             font-size: 20px;
+            color: #f1f1f1;
             margin-bottom: 30px;
         }
 
@@ -101,23 +105,26 @@
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
+            transition: 0.2s;
         }
 
         .main-button:hover,
         .buy-button:hover,
         .submit-button:hover {
             background: #7e3ee5;
+            transform: scale(1.03);
         }
 
         section {
             padding: 70px 8%;
-            background: rgba(5, 5, 10, 0.82);
+            background: rgba(5, 5, 10, 0.78);
         }
 
         .section-title {
             text-align: center;
             font-size: 40px;
             margin-bottom: 40px;
+            text-shadow: 0 0 15px rgba(180, 108, 255, 0.45);
         }
 
         .products {
@@ -129,7 +136,7 @@
         }
 
         .card {
-            background: rgba(15, 15, 24, 0.96);
+            background: rgba(15, 15, 24, 0.94);
             border: 1px solid #303044;
             border-radius: 14px;
             padding: 25px;
@@ -169,8 +176,9 @@
         footer {
             text-align: center;
             padding: 30px;
-            background: rgba(8, 8, 14, 0.98);
+            background: rgba(8, 8, 14, 0.96);
             color: #999;
+            border-top: 1px solid #2c2c42;
         }
 
         /* POPUP */
@@ -180,7 +188,7 @@
             position: fixed;
             inset: 0;
             z-index: 9999;
-            background: rgba(0, 0, 0, 0.75);
+            background: rgba(0, 0, 0, 0.70);
             align-items: center;
             justify-content: center;
             padding: 20px;
@@ -269,6 +277,10 @@
             .hero p {
                 font-size: 16px;
             }
+
+            section {
+                padding: 60px 5%;
+            }
         }
     </style>
 </head>
@@ -286,8 +298,6 @@
 </header>
 
 
-<!-- HOME -->
-
 <section class="hero" id="home">
     <div>
         <h1>LEGACY SMP</h1>
@@ -303,8 +313,6 @@
     </div>
 </section>
 
-
-<!-- RANKS -->
 
 <section id="ranks">
     <h2 class="section-title">⭐ Ranks</h2>
@@ -360,8 +368,6 @@
 </section>
 
 
-<!-- CRATES -->
-
 <section id="crates">
     <h2 class="section-title">🎁 Crates</h2>
 
@@ -407,14 +413,10 @@
 </section>
 
 
-<!-- FOOTER -->
-
 <footer>
     <p>© 2026 Legacy SMP — Alle rechten voorbehouden.</p>
 </footer>
 
-
-<!-- BESTEL POPUP -->
 
 <div class="popup" id="orderPopup">
 
@@ -460,7 +462,6 @@
     let selectedPrice = "";
 
     function openPopup(product, price) {
-
         selectedProduct = product;
         selectedPrice = price;
 
@@ -472,15 +473,12 @@
         document.getElementById("minecraftName").focus();
     }
 
-
     function closePopup() {
-
         document.getElementById("orderPopup").classList.remove("show");
 
         document.getElementById("minecraftName").value = "";
         document.getElementById("email").value = "";
     }
-
 
     function sendOrder() {
 
@@ -509,13 +507,10 @@
         );
     }
 
-
     document.getElementById("orderPopup").addEventListener("click", function(event) {
-
         if (event.target === this) {
             closePopup();
         }
-
     });
 
 </script>
