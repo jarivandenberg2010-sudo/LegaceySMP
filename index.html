@@ -194,7 +194,7 @@
         }
 
         /* =========================
-           POPUP
+           BESTEL POPUP
         ========================= */
 
         .popup {
@@ -223,7 +223,7 @@
         }
 
         .popup-box h2 {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .popup-info {
@@ -282,19 +282,11 @@
             cursor: pointer;
         }
 
-        .success-message {
-            display: none;
-            margin-top: 15px;
-            padding: 13px;
-            border-radius: 8px;
-            background: rgba(80, 200, 120, 0.12);
-            border: 1px solid rgba(80, 200, 120, 0.35);
-            color: #91efad;
-            line-height: 1.5;
+        .close-button:hover {
+            background: #20202c;
         }
 
         @media (max-width: 700px) {
-
             .home-content h1 {
                 font-size: 48px;
             }
@@ -320,42 +312,29 @@
 
 <body>
 
-
-<!-- =========================
-     STARTSCHERM
-========================= -->
+<!-- STARTSCHERM -->
 
 <div id="homeScreen">
-
     <div class="home-content">
-
         <h1>LEGACY SMP</h1>
 
         <button class="shop-button" onclick="openShop()">
             Bekijk webshop
         </button>
-
     </div>
-
 </div>
 
 
-<!-- =========================
-     WEBSHOP
-========================= -->
+<!-- WEBSHOP -->
 
 <div id="shopScreen">
 
     <header>
-
-        <div class="logo">
-            LEGACY SMP
-        </div>
+        <div class="logo">LEGACY SMP</div>
 
         <button class="back-button" onclick="goHome()">
             ← Terug
         </button>
-
     </header>
 
 
@@ -425,7 +404,6 @@
             </div>
 
         </div>
-
     </section>
 
 
@@ -484,7 +462,6 @@
             </div>
 
         </div>
-
     </section>
 
 
@@ -495,9 +472,7 @@
 </div>
 
 
-<!-- =========================
-     BESTEL POPUP
-========================= -->
+<!-- BESTEL POPUP -->
 
 <div class="popup" id="orderPopup">
 
@@ -514,28 +489,75 @@
             Product
         </div>
 
-        <input
-            type="text"
-            id="minecraftName"
-            placeholder="Minecraft gebruikersnaam"
+        <!--
+            FORMSUBMIT
+            De bestelling wordt naar jouw mailbox gestuurd.
+        -->
+
+        <form
+            action="https://formsubmit.co/legacysmp36@gmail.com"
+            method="POST"
         >
 
-        <input
-            type="email"
-            id="email"
-            placeholder="E-mailadres"
+            <input
+                type="hidden"
+                name="_subject"
+                value="Nieuwe Legacy SMP bestelling"
+            >
+
+            <input
+                type="hidden"
+                name="_captcha"
+                value="false"
+            >
+
+            <input
+                type="hidden"
+                name="_template"
+                value="table"
+            >
+
+            <input
+                type="hidden"
+                id="productField"
+                name="Product"
+                value=""
+            >
+
+            <input
+                type="hidden"
+                id="priceField"
+                name="Prijs"
+                value=""
+            >
+
+            <input
+                type="text"
+                name="Minecraft gebruikersnaam"
+                placeholder="Minecraft gebruikersnaam"
+                required
+            >
+
+            <input
+                type="email"
+                name="E-mailadres"
+                placeholder="E-mailadres"
+                required
+            >
+
+            <button
+                type="submit"
+                class="submit-button"
+            >
+                Bestelling plaatsen
+            </button>
+
+        </form>
+
+        <button
+            class="close-button"
+            onclick="closePopup()"
         >
-
-        <button class="submit-button" onclick="sendOrder()">
-            Bestelling plaatsen
-        </button>
-
-        <div class="success-message" id="successMessage">
-            Bedankt! Je bestelling is ingevuld.
-            Je ontvangt het Tikkie-betaalverzoek per e-mail.
-        </div>
-
-        <button class="close-button" onclick="closePopup()">
             Sluiten
         </button>
 
@@ -549,24 +571,19 @@
     let selectedProduct = "";
     let selectedPrice = "";
 
-
     function openShop() {
-
         document.getElementById("homeScreen").style.display = "none";
         document.getElementById("shopScreen").style.display = "block";
 
         window.scrollTo(0, 0);
     }
 
-
     function goHome() {
-
         document.getElementById("shopScreen").style.display = "none";
         document.getElementById("homeScreen").style.display = "flex";
 
         window.scrollTo(0, 0);
     }
-
 
     function openOrder(product, price) {
 
@@ -576,64 +593,19 @@
         document.getElementById("selectedProduct").textContent =
             product + " — " + price;
 
-        document.getElementById("successMessage").style.display = "none";
+        document.getElementById("productField").value =
+            product;
+
+        document.getElementById("priceField").value =
+            price;
 
         document.getElementById("orderPopup").classList.add("show");
-
-        document.getElementById("minecraftName").focus();
     }
-
 
     function closePopup() {
 
         document.getElementById("orderPopup").classList.remove("show");
-
-        document.getElementById("minecraftName").value = "";
-        document.getElementById("email").value = "";
-
-        document.getElementById("successMessage").style.display = "none";
     }
-
-
-    function sendOrder() {
-
-        const minecraftName =
-            document.getElementById("minecraftName").value.trim();
-
-        const email =
-            document.getElementById("email").value.trim();
-
-
-        if (minecraftName === "") {
-
-            alert("Vul je Minecraft gebruikersnaam in.");
-            return;
-
-        }
-
-
-        if (email === "") {
-
-            alert("Vul je e-mailadres in.");
-            return;
-
-        }
-
-
-        /*
-           Hier kun je later een gratis formulierdienst koppelen
-           zodat de bestelling echt naar jou wordt verstuurd.
-        */
-
-        document.getElementById("successMessage").style.display = "block";
-
-        console.log("Nieuwe bestelling");
-        console.log("Product:", selectedProduct);
-        console.log("Prijs:", selectedPrice);
-        console.log("Minecraft gebruikersnaam:", minecraftName);
-        console.log("E-mailadres:", email);
-    }
-
 
     document.getElementById("orderPopup").addEventListener(
         "click",
