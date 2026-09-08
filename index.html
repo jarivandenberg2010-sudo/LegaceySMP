@@ -1,8 +1,10 @@
+```html
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Legacy SMP | Webshop</title>
 
     <style>
@@ -13,61 +15,87 @@
             font-family: Arial, sans-serif;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            background: #08080d;
+            background-image: url("LEGACY SMP bij Zonsondergang.png");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
             color: white;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 5, 10, 0.55);
+            z-index: -1;
         }
 
         header {
-            background: #0d0d15;
-            border-bottom: 1px solid #24243a;
+            background: rgba(10, 10, 18, 0.92);
+            border-bottom: 1px solid rgba(155, 92, 255, 0.35);
             padding: 20px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
-            z-index: 10;
+            z-index: 100;
+            backdrop-filter: blur(10px);
         }
 
         .logo {
             font-size: 28px;
             font-weight: bold;
-            color: #9b5cff;
+            color: #b46cff;
+            text-shadow: 0 0 15px rgba(180, 108, 255, 0.7);
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
         }
 
         nav a {
             color: white;
             text-decoration: none;
-            margin-left: 25px;
             font-weight: bold;
+            transition: 0.2s;
         }
 
         nav a:hover {
-            color: #9b5cff;
+            color: #b46cff;
         }
 
         .hero {
-            min-height: 450px;
+            min-height: 560px;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 40px 20px;
-            background:
-                radial-gradient(circle at center, #281650 0%, #08080d 65%);
+            padding: 60px 20px;
+        }
+
+        .hero-content {
+            max-width: 800px;
         }
 
         .hero h1 {
-            font-size: 60px;
-            margin-bottom: 15px;
-            color: #ffffff;
-            text-shadow: 0 0 25px #9b5cff;
+            font-size: 68px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(180, 108, 255, 0.9);
         }
 
         .hero p {
-            color: #bdbdc9;
-            font-size: 18px;
+            color: #eeeeee;
+            font-size: 19px;
+            line-height: 1.6;
             margin-bottom: 30px;
         }
 
@@ -75,64 +103,71 @@
             display: inline-block;
             background: #9b5cff;
             color: white;
-            padding: 14px 30px;
-            border-radius: 8px;
+            padding: 15px 32px;
+            border-radius: 9px;
             text-decoration: none;
             font-weight: bold;
             transition: 0.2s;
+            box-shadow: 0 0 20px rgba(155, 92, 255, 0.35);
         }
 
         .button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px #9b5cff;
+            transform: translateY(-2px) scale(1.03);
+            background: #8140e8;
+            box-shadow: 0 0 30px rgba(155, 92, 255, 0.6);
         }
 
         section {
-            padding: 70px 8%;
+            padding: 80px 8%;
+            background: rgba(7, 7, 12, 0.72);
         }
 
         .section-title {
             text-align: center;
-            font-size: 35px;
-            margin-bottom: 40px;
+            font-size: 38px;
+            margin-bottom: 45px;
+            text-shadow: 0 0 15px rgba(180, 108, 255, 0.4);
         }
 
         .products {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .card {
-            background: #11111a;
-            border: 1px solid #29293d;
-            border-radius: 12px;
-            padding: 25px;
+            background: rgba(15, 15, 24, 0.94);
+            border: 1px solid #2d2d44;
+            border-radius: 14px;
+            padding: 28px;
             text-align: center;
-            transition: 0.2s;
+            transition: 0.25s;
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-7px);
             border-color: #9b5cff;
-            box-shadow: 0 0 20px rgba(155, 92, 255, 0.25);
+            box-shadow: 0 0 25px rgba(155, 92, 255, 0.25);
         }
 
         .card h3 {
-            font-size: 23px;
-            margin-bottom: 12px;
+            font-size: 24px;
+            margin-bottom: 13px;
         }
 
         .card p {
-            color: #aaaab8;
-            min-height: 45px;
-            margin-bottom: 18px;
+            color: #b5b5c2;
+            line-height: 1.5;
+            min-height: 50px;
+            margin-bottom: 20px;
         }
 
         .price {
-            font-size: 25px;
+            font-size: 28px;
             font-weight: bold;
-            color: #9b5cff;
+            color: #b46cff;
             margin-bottom: 20px;
         }
 
@@ -141,9 +176,10 @@
             background: #9b5cff;
             color: white;
             padding: 12px;
-            border-radius: 7px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
+            transition: 0.2s;
         }
 
         .buy:hover {
@@ -151,25 +187,41 @@
         }
 
         footer {
-            background: #0d0d15;
+            background: rgba(8, 8, 14, 0.96);
             text-align: center;
             padding: 30px;
-            color: #888895;
-            border-top: 1px solid #24243a;
+            color: #9292a1;
+            border-top: 1px solid #252538;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 700px) {
             header {
                 flex-direction: column;
                 gap: 15px;
             }
 
-            nav a {
-                margin: 0 8px;
+            nav {
+                gap: 15px;
+            }
+
+            .hero {
+                min-height: 480px;
             }
 
             .hero h1 {
-                font-size: 42px;
+                font-size: 44px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            section {
+                padding: 60px 5%;
+            }
+
+            .section-title {
+                font-size: 31px;
             }
         }
     </style>
@@ -177,106 +229,116 @@
 
 <body>
 
-<header>
-    <div class="logo">LEGACY SMP</div>
+    <header>
+        <div class="logo">LEGACY SMP</div>
 
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#ranks">Ranks</a>
-        <a href="#crates">Crates</a>
-    </nav>
-</header>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#ranks">Ranks</a>
+            <a href="#crates">Crates</a>
+        </nav>
+    </header>
 
-<section class="hero" id="home">
-    <div>
-        <h1>LEGACY SMP</h1>
-        <p>Welkom bij de officiële Legacy SMP webshop.</p>
-        <a href="#ranks" class="button">Bekijk ranks</a>
-    </div>
-</section>
 
-<section id="ranks">
-    <h2 class="section-title">⭐ Ranks</h2>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>LEGACY SMP</h1>
 
-    <div class="products">
+            <p>
+                Welkom bij de officiële Legacy SMP webshop.
+                Bekijk onze ranks en crates en haal het maximale uit jouw avontuur.
+            </p>
 
-        <div class="card">
-            <h3>VIP</h3>
-            <p>Ontvang speciale voordelen op Legacy SMP.</p>
-            <div class="price">€5</div>
-            <a href="#" class="buy">Kopen</a>
+            <a href="#ranks" class="button">Bekijk de webshop</a>
         </div>
+    </section>
 
-        <div class="card">
-            <h3>ELITE</h3>
-            <p>Een krachtige rank met extra voordelen.</p>
-            <div class="price">€10</div>
-            <a href="#" class="buy">Kopen</a>
+
+    <section id="ranks">
+        <h2 class="section-title">⭐ Ranks</h2>
+
+        <div class="products">
+
+            <div class="card">
+                <h3>VIP</h3>
+                <p>Ontvang speciale voordelen en extra functies op Legacy SMP.</p>
+                <div class="price">€5</div>
+                <a href="#" class="buy">Kopen</a>
+            </div>
+
+            <div class="card">
+                <h3>ELITE</h3>
+                <p>Een krachtige rank met nog meer voordelen voor jouw avontuur.</p>
+                <div class="price">€10</div>
+                <a href="#" class="buy">Kopen</a>
+            </div>
+
+            <div class="card">
+                <h3>LEGEND</h3>
+                <p>Word een echte legende met exclusieve servervoordelen.</p>
+                <div class="price">€15</div>
+                <a href="#" class="buy">Kopen</a>
+            </div>
+
+            <div class="card">
+                <h3>HERO</h3>
+                <p>Een exclusieve rank voor spelers die meer uit Legacy SMP willen halen.</p>
+                <div class="price">€25</div>
+                <a href="#" class="buy">Kopen</a>
+            </div>
+
+            <div class="card">
+                <h3>LEGACY</h3>
+                <p>De ultieme rank voor echte Legacy SMP-spelers.</p>
+                <div class="price">€35</div>
+                <a href="#" class="buy">Kopen</a>
+            </div>
+
         </div>
+    </section>
 
-        <div class="card">
-            <h3>LEGEND</h3>
-            <p>Word een echte legende op de server.</p>
-            <div class="price">€15</div>
-            <a href="#" class="buy">Kopen</a>
+
+    <section id="crates">
+        <h2 class="section-title">🎁 Crates</h2>
+
+        <div class="products">
+
+            <div class="card">
+                <h3>Spawner Crate</h3>
+                <p>Maak kans op krachtige spawners en andere speciale beloningen.</p>
+                <div class="price">€15</div>
+                <a href="#" class="buy">Kopen</a>
+            </div>
+
+            <div class="card">
+                <h3>Legacy Crate</h3>
+                <p>Een speciale crate met geweldige beloningen voor jouw avontuur.</p>
+                <div class="price">€5</div>
+                <a href="#" class="buy">Kopen</a>
+            </div>
+
+            <div class="card">
+                <h3>Legacy Crate+</h3>
+                <p>Een verbeterde crate met betere en zeldzamere beloningen.</p>
+                <div class="price">€10</div>
+                <a href="#" class="buy">Kopen</a>
+            </div>
+
+            <div class="card">
+                <h3>Obsidian Crate</h3>
+                <p>Een exclusieve crate met speciale en krachtige rewards.</p>
+                <div class="price">€20</div>
+                <a href="#" class="buy">Kopen</a>
+            </div>
+
         </div>
+    </section>
 
-        <div class="card">
-            <h3>HERO</h3>
-            <p>Een exclusieve rank voor echte spelers.</p>
-            <div class="price">€25</div>
-            <a href="#" class="buy">Kopen</a>
-        </div>
 
-        <div class="card">
-            <h3>LEGACY</h3>
-            <p>De ultieme Legacy SMP rank.</p>
-            <div class="price">€35</div>
-            <a href="#" class="buy">Kopen</a>
-        </div>
-
-    </div>
-</section>
-
-<section id="crates">
-    <h2 class="section-title">🎁 Crates</h2>
-
-    <div class="products">
-
-        <div class="card">
-            <h3>Legacy Crate</h3>
-            <p>Een speciale crate met geweldige beloningen.</p>
-            <div class="price">€5</div>
-            <a href="#" class="buy">Kopen</a>
-        </div>
-
-        <div class="card">
-            <h3>Legacy Crate+</h3>
-            <p>Een verbeterde crate met betere rewards.</p>
-            <div class="price">€10</div>
-            <a href="#" class="buy">Kopen</a>
-        </div>
-
-        <div class="card">
-            <h3>Spawner Crate</h3>
-            <p>Maak kans op krachtige spawners.</p>
-            <div class="price">€15</div>
-            <a href="#" class="buy">Kopen</a>
-        </div>
-
-        <div class="card">
-            <h3>Obsidian Crate</h3>
-            <p>Een exclusieve crate met speciale rewards.</p>
-            <div class="price">€20</div>
-            <a href="#" class="buy">Kopen</a>
-        </div>
-
-    </div>
-</section>
-
-<footer>
-    <p>© 2026 Legacy SMP — Alle rechten voorbehouden.</p>
-</footer>
+    <footer>
+        <p>© 2026 Legacy SMP — Alle rechten voorbehouden.</p>
+    </footer>
 
 </body>
 </html>
+```
